@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme-pref="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f5c5c">
+<meta name="description" content="أسماء الله الحسنى: تسعة وتسعون اسمًا بمعانيها وكيفية التعبد لله بها، مع تنبيه يومي وحفظ بصيغة PDF.">
+<title>أسماء الله الحسنى</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* تطبيق السمة قبل الرسم لتفادي الوميض */
+  (function () {
+    try {
+      var t = localStorage.getItem('asma.theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <svg class="brand-star" viewBox="0 0 48 48" aria-hidden="true"><use href="#star8"/></svg>
+      <div>
+        <h1>أسماء الله الحسنى</h1>
+        <p class="sub">تسعة وتسعون اسمًا · معنى وتعبّد ودعاء</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btnTheme" type="button" aria-label="تبديل المظهر" title="المظهر">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a8.5 8.5 0 1 0 11.5 11.5Z"/></svg>
+      </button>
+      <button class="icon-btn" id="btnSettings" type="button" aria-label="الإعدادات والتنبيه وحفظ PDF" title="الإعدادات">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm8.2 5.3-1.7-1a6.9 6.9 0 0 0 0-1.6l1.7-1a.7.7 0 0 0 .2-.9l-1.6-2.8a.7.7 0 0 0-.9-.3l-1.9.8a7 7 0 0 0-1.4-.8l-.3-2a.7.7 0 0 0-.7-.6h-3.2a.7.7 0 0 0-.7.6l-.3 2a7 7 0 0 0-1.4.8l-1.9-.8a.7.7 0 0 0-.9.3L3.6 9.3a.7.7 0 0 0 .2.9l1.7 1a6.9 6.9 0 0 0 0 1.6l-1.7 1a.7.7 0 0 0-.2.9l1.6 2.8c.2.3.6.4.9.3l1.9-.8c.4.3.9.6 1.4.8l.3 2c0 .4.3.6.7.6h3.2c.4 0 .7-.2.7-.6l.3-2c.5-.2 1-.5 1.4-.8l1.9.8c.3.1.7 0 .9-.3l1.6-2.8a.7.7 0 0 0-.2-.9Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="today" id="today" aria-label="اسم اليوم"></section>
+
+  <section class="tools" aria-label="بحث وتصفية">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 0 4.6 13.4l4.2 4.2 1.4-1.4-4.2-4.2A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/></svg>
+      <input id="q" type="search" inputmode="search" placeholder="ابحث باسم أو معنى…" autocomplete="off" enterkeyhint="search">
+    </label>
+    <div class="chips" id="chips" role="tablist" aria-label="التصفية"></div>
+    <div class="progress" id="progress" aria-live="polite"></div>
+  </section>
+
+  <section class="grid" id="grid" aria-label="الأسماء الحسنى"></section>
+  <p class="empty" id="empty" hidden>لا توجد أسماء مطابقة. جرّب كلمة أخرى أو غيّر التصفية.</p>
+
+  <footer class="foot">
+    <p>«إن لله تسعة وتسعين اسمًا، مئة إلا واحدًا، من أحصاها دخل الجنة» (متفق عليه).</p>
+    <button class="link-btn" id="btnAbout" type="button">عن المحتوى ومصادره</button>
+  </footer>
+</main>
+
+<!-- بطاقة تفاصيل الاسم -->
+<div class="sheet-backdrop" id="backdrop" hidden></div>
+<article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetName" hidden></article>
+
+<!-- الإعدادات -->
+<div class="sheet-backdrop" id="backdrop2" hidden></div>
+<section class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+  <div class="panel-head">
+    <h2 id="panelTitle">الإعدادات</h2>
+    <button class="icon-btn flat" id="panelClose" type="button" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="panel-body">
+    <section class="block">
+      <h3>تنبيه الأسماء</h3>
+      <p class="hint">اضبط الأوقات التي تريد أن يصلك فيها اسم اليوم مع معناه المختصر. يتجدد الاسم كل يوم تلقائيًا.</p>
+      <div class="times" id="times"></div>
+      <div class="add-time">
+        <label for="timeInput" class="sr">وقت جديد</label>
+        <input type="time" id="timeInput" value="08:00">
+        <button class="btn" id="btnAddTime" type="button">إضافة وقت</button>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="btnTestNotif" type="button">جرّب تنبيهًا الآن</button>
+        <span class="status" id="notifStatus" aria-live="polite"></span>
+      </div>
+      <p class="hint small" id="notifNote"></p>
+    </section>
+
+    <section class="block">
+      <h3>حفظ ملف PDF</h3>
+      <p class="hint">يُنشأ الملف على جهازك مباشرة دون إنترنت، ويحتوي المعنى والتعبد والدعاء لكل اسم.</p>
+      <div class="row wrap-row">
+        <button class="btn" id="pdfAll" type="button">كل الأسماء (٩٩)</button>
+        <button class="btn ghost" id="pdfFav" type="button">المفضلة فقط</button>
+        <button class="btn ghost" id="pdfLearned" type="button">ما حفظتُه</button>
+      </div>
+      <div class="bar" id="pdfBar" hidden><i id="pdfBarFill"></i></div>
+      <p class="status" id="pdfStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="block">
+      <h3>المظهر</h3>
+      <div class="seg" id="themeSeg" role="radiogroup" aria-label="المظهر">
+        <button type="button" role="radio" data-v="auto">تلقائي</button>
+        <button type="button" role="radio" data-v="light">فاتح</button>
+        <button type="button" role="radio" data-v="dark">داكن</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>بياناتي</h3>
+      <p class="hint">المفضلة وما حفظتَه محفوظان على جهازك فقط، ولا يُرسل التطبيق أي بيانات.</p>
+      <button class="btn ghost danger" id="btnReset" type="button">مسح المفضلة والحفظ</button>
+    </section>
+  </div>
+</section>
+
+<!-- عن المحتوى -->
+<section class="panel" id="about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+  <div class="panel-head">
+    <h2 id="aboutTitle">عن المحتوى ومصادره</h2>
+    <button class="icon-btn flat" id="aboutClose" type="button" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="panel-body prose">
+    <h3>منهج الكتابة</h3>
+    <p>جُمع معنى كل اسم وكيفية التعبد به من كتب أهل السنة والجماعة في التفسير وشروح الأسماء، وأبرزها: تفسير الطبري وابن كثير والقرطبي والسعدي، و«بدائع الفوائد» و«مدارج السالكين» لابن القيم، و«شأن الدعاء» للخطابي، و«الأسماء والصفات» للبيهقي، و«القواعد المثلى» لابن عثيمين، و«شرح العقيدة الطحاوية». واقتُصر في التعبد على ما دلّ عليه الكتاب والسنة، دون تحديد أعداد أو فضائل لأذكار لم تثبت.</p>
+
+    <h3>معنى الإحصاء</h3>
+    <p>قال ابن القيم رحمه الله: إحصاء الأسماء مراتب: الأولى إحصاء ألفاظها وعددها، والثانية فهم معانيها ومدلولها، والثالثة دعاء الله بها: دعاء الثناء والعبادة ودعاء المسألة. وهذا ما تقصده هذه الصفحات.</p>
+
+    <h3>عدد الأسماء وترتيبها</h3>
+    <p>أسماء الله أكثر من تسعة وتسعين؛ فقد جاء في دعاء النبي ﷺ: «أسألك بكل اسم هو لك سمّيت به نفسك، أو أنزلته في كتابك، أو علّمته أحدًا من خلقك، أو استأثرت به في علم الغيب عندك» (أحمد). وحديث «تسعة وتسعين اسمًا» لا يعني حصرها، بل أن من أحصى هذا العدد منها دخل الجنة.</p>
+    <p>أما سرد التسعة والتسعين في رواية الترمذي وابن ماجه عن أبي هريرة رضي الله عنه، فقد رأى جمع من أهل الحديث، منهم ابن تيمية وابن حجر، أن السرد مُدرج من بعض الرواة وليس من كلام النبي ﷺ. وقد اعتمدت هذه الصفحات الترتيب المشهور تيسيرًا للحفظ، وأشارت بوضوح إلى مصدر كل اسم:</p>
+    <ul>
+      <li><b>ثابت في القرآن:</b> ورد اسمًا أو وصفًا صريحًا في الكتاب.</li>
+      <li><b>ثابت في السنة:</b> ثبت في حديث صحيح.</li>
+      <li><b>ورد في رواية الترمذي:</b> معناه ثابت بالأدلة فعلًا أو وصفًا، وإثباته اسمًا محل خلاف بين أهل العلم.</li>
+    </ul>
+
+    <h3>أسماء تُذكر مقترنة</h3>
+    <p>بعض الأسماء لا تُفرد في الدعاء، بل تُذكر مع مقابلها لأن الكمال في اجتماعهما: القابض الباسط، والخافض الرافع، والمعزّ المذلّ، والمقدّم المؤخّر، والضارّ النافع، والمعطي المانع، والمبدئ المعيد، والمحيي المميت. فلا يقال «يا ضار» أو «يا مذل» وحدها، بل يقال: «يا من بيده النفع والضر».</p>
+
+    <h3>تنبيه</h3>
+    <p>الدعاء بأسماء الله مشروع بقوله تعالى: ﴿ولله الأسماء الحسنى فادعوه بها﴾. وإذا وجدتَ خطأً أو ملاحظة علمية فنرجو التصحيح عبر صفحة المشروع على GitHub.</p>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- رموز مشتركة -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="star8" viewBox="0 0 48 48">
+      <path d="M24 2 29.6 11.4 40.2 7.8 36.6 18.4 46 24 36.6 29.6 40.2 40.2 29.6 36.6 24 46 18.4 36.6 7.8 40.2 11.4 29.6 2 24 11.4 18.4 7.8 7.8 18.4 11.4Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="data/names1.js"></script>
+<script src="data/names2.js"></script>
+<script src="data/names3.js"></script>
+<script src="pdf.js"></script>
+<script src="notify.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

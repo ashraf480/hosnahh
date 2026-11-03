@@ -1,0 +1,15 @@
+{
+  "appId": "com.asmaallah.husna",
+  "appName": "أسماء الله الحسنى",
+  "webDir": "www",
+  "backgroundColor": "#0f5c5c",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_name",
+      "iconColor": "#0F6A68"
+    }
+  }
+}
